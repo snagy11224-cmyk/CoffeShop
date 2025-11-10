@@ -1,57 +1,231 @@
-/* Coffee palette + Bootstrap primary override */
-:root {
-  --coffee-950: #2b1b17;
-  --coffee-900: #3e2723;
-  --coffee-800: #4e342e;
-  --coffee-700: #5d4037;
-  --coffee-600: #6d4c41;
-  --coffee-300: #bcaaa4;
-  --coffee-200: #d7ccc8;
-  --coffee-100: #efe7e4;
+/* =========================================================
+   Coffee Theme (Light + Dark)
+   - Rich brown palette
+   - Bootstrap variable overrides
+   - Section/hero/cards/buttons/links/navbar/forms
+   ========================================================= */
 
-  /* set Bootstrap primary to a coffee tone */
-  --bs-primary: #6d4c41;
-  --bs-primary-rgb: 109, 76, 65;
+/* ---------- Palette (base) ---------- */
+:root{
+  /* Light coffee spectrum */
+  --coffee-1000: #1f130e; /* darkest */
+  --coffee-900:  #2b1b17;
+  --coffee-800:  #3a241c;
+  --coffee-700:  #5b3c2f;
+  --coffee-650:  #7a5848;
+  --coffee-600:  #8e6a58;  /* primary */
+  --coffee-500:  #a57d66;  /* hover */
+  --coffee-400:  #be9a84;  /* accents */
+  --coffee-300:  #d6bba8;
+  --coffee-200:  #ead8c9;
+  --coffee-150:  #f1e6dc;
+  --coffee-100:  #f6eee7;  /* muted section bg */
+  --coffee-050:  #fbf8f5;  /* page bg (very light) */
+
+  --ink-900: #2a201b; /* headings on light */
+  --ink-700: #4d3c33; /* body on light */
+
+  /* bootstrap override */
+  --bs-primary: var(--coffee-600);
+  --bs-primary-rgb: 142,106,88;
+
+  /* surfaces */
+  --page-bg:  var(--coffee-050);
+  --surface-1:#ffffff;
+  --surface-2:var(--coffee-100);
+
+  /* links */
+  --link:       var(--coffee-700);
+  --link-hover: var(--coffee-900);
+
+  /* navbar */
+  --navbar-bg:#fff;
+  --navbar-border: rgba(0,0,0,.06);
+  --navbar-link: var(--ink-700);
+  --navbar-link-active: var(--coffee-700);
+
+  /* hero (LIGHT version) */
+  --hero-fg: #2a201b; /* dark text on light bg */
+  --hero-grad-a: #f7eee7;
+  --hero-grad-b: #ead8c9;
+  --hero-grad-c: #d6bba8;
+
+  /* cards */
+  --card-bg: var(--surface-1);
+  --card-fg: var(--ink-700);
+  --card-img-bg: var(--coffee-150);
+
+  /* shadows */
+  --shadow-1: 0 6px 18px rgba(0,0,0,.08);
+  --shadow-2: 0 12px 30px rgba(0,0,0,.14);
+}
+/* ---------- Dark mode variables ---------- */
+:root[data-theme="dark"],
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page-bg:  #15100e;
+    --surface-1: #1d1612;
+    --surface-2: #c4b1a4;
+    --ink-900: #fff;
+    --ink-700: #e9e2dd;
+
+    --link: #e2c2a9;
+    --link-hover: #f0d9c8;
+
+    --navbar-bg: #1b1411;
+    --navbar-border: rgba(255,255,255,.06);
+    --navbar-link: #e9e2dd;
+    --navbar-link-active: #ffe3c8;
+
+    --hero-fg: #fff;
+    --hero-grad-a: #1c110d;
+    --hero-grad-b: #2b1b17;
+    --hero-grad-c: #120b08;
+
+    --card-bg: #221a15;
+    --card-fg: #f1e8e3;
+    --card-img-bg: #120b08;
+
+    --bs-primary: #b88468;
+    --bs-primary-rgb: 184,132,104;
+
+    --shadow-1: 0 6px 18px rgba(0,0,0,.35);
+    --shadow-2: 0 12px 30px rgba(0,0,0,.5);
+  }
 }
 
-body { background: #faf7f5; }
+/* ---------- Base & typography ---------- */
+html { scroll-behavior: smooth; }
+:target { scroll-margin-top: 80px; }
 
+body {
+  background: var(--page-bg);
+  color: var(--ink-700);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+               Arial, "Cairo", "Inter", sans-serif;
+  line-height: 1.55;
+}
+
+/* Headings richer on light/dark */
+h1, h2, h3, .h1, .h2, .h3 { color: var(--ink-900); }
+
+/* ---------- Navbar ---------- */
+.navbar {
+  background: var(--navbar-bg) !important;
+  border-bottom: 1px solid var(--navbar-border);
+}
+.navbar .navbar-brand { color: var(--ink-900); }
+.navbar .nav-link {
+  color: var(--navbar-link) !important;
+  transition: color .2s ease;
+}
 .navbar .nav-link.active,
 .navbar .nav-link.show,
-.navbar .nav-link:hover { color: var(--coffee-700) !important; }
+.navbar .nav-link:hover {
+  color: var(--navbar-link-active) !important;
+}
 
+/* ---------- Hero ---------- */
 .hero-section {
-  color: #fff;
-  background: linear-gradient(
-    135deg,
-    #4a2f1d 0%,
-    #5d4037 50%,
-    #3e2723 100%
+  color: var(--hero-fg);
+  background: linear-gradient(135deg,
+    var(--hero-grad-a) 0%,
+    var(--hero-grad-b) 50%,
+    var(--hero-grad-c) 100%
   );
   padding-top: 5rem;
   padding-bottom: 5rem;
+  position: relative;
+  overflow: clip;
 }
-
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1200px 400px at 10% -10%, rgba(255,255,255,.06), transparent 60%),
+    radial-gradient(1200px 500px at 110% 110%, rgba(0,0,0,.25), transparent 60%);
+  pointer-events: none;
+}
 .hero-image {
+  background: var(--card-img-bg);
   border-radius: 20px;
-  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+  box-shadow: var(--shadow-2);
 }
 
-/* Sections */
-.section-muted { background: var(--coffee-100); }
+/* ---------- Sections ---------- */
+.section-muted { background: var(--surface-2); }
 
-/* Buttons */
+/* ---------- Cards ---------- */
+.card {
+  background: var(--card-bg);
+  color: var(--card-fg);
+  border: 0;
+  box-shadow: var(--shadow-1);
+}
+.card .card-img-top {
+  background: var(--card-img-bg);
+  object-fit: cover;
+}
+
+/* ---------- Buttons ---------- */
 .btn-primary {
-  background-color: var(--bs-primary);
-  border-color: var(--coffee-700);
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: color-mix(in oklab, var(--bs-primary), black 12%);
+  --bs-btn-hover-bg: color-mix(in oklab, var(--bs-primary), black 10%);
+  --bs-btn-hover-border-color: color-mix(in oklab, var(--bs-primary), black 22%);
+  --bs-btn-active-bg: color-mix(in oklab, var(--bs-primary), black 18%);
+  --bs-btn-active-border-color: color-mix(in oklab, var(--bs-primary), black 28%);
+  --bs-btn-disabled-bg: color-mix(in oklab, var(--bs-primary), white 50%);
+  --bs-btn-disabled-border-color: color-mix(in oklab, var(--bs-primary), white 40%);
 }
-.btn-primary:hover { background-color: var(--coffee-700); border-color: var(--coffee-800); }
 .btn-outline-light:hover { color: #000; }
 
-/* Cards */
-.card { border: 0; }
-.card .card-img-top { background: var(--coffee-900); }
+/* Ghost buttons for dark hero */
+.btn-ghost {
+  color: #fff;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,.2);
+  border-color: rgba(255,255,255,.35);
+}
 
-/* Links */
-a { color: var(--coffee-700); }
-a:hover { color: var(--coffee-900); }
+/* ---------- Links ---------- */
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; }
+
+/* ---------- Tables & pagination ---------- */
+.table thead th { white-space: nowrap; }
+.pagination .page-link { cursor: pointer; }
+
+/* ---------- Forms ---------- */
+.form-control, .form-select, .input-group-text, .form-check-input {
+  background-color: color-mix(in oklab, var(--surface-1), black 0%);
+  color: var(--ink-700);
+  border-color: color-mix(in oklab, var(--ink-700), transparent 85%);
+}
+.form-control:focus, .form-select:focus {
+  border-color: color-mix(in oklab, var(--bs-primary), black 10%);
+  box-shadow: 0 0 0 .25rem color-mix(in oklab, var(--bs-primary), transparent 80%);
+}
+
+/* ---------- Badges / alerts ---------- */
+.badge.bg-primary {
+  background: var(--bs-primary) !important;
+}
+.alert {
+  border: 0;
+  box-shadow: var(--shadow-1);
+}
+
+/* ---------- Footer ---------- */
+footer { background: transparent; color: var(--ink-700); }
+
+/* ---------- Utilities ---------- */
+.shadow-1 { box-shadow: var(--shadow-1); }
+.shadow-2 { box-shadow: var(--shadow-2); }
+
+/* Optional: smoother images */
+img { image-rendering: auto; }
