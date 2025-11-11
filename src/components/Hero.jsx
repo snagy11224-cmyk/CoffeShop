@@ -40,8 +40,12 @@ export default function Hero(){
               From hand-selected beans to slow roasting and smooth pours. 
               Enjoy warm flavors, calm atmosphere, and coffee that feels personal.
             </p>
-            <a href="#menu" className="btn btn-light btn-lg me-2">Menu</a>
-            <a href="/contact" className="btn btn-outline-light btn-lg">Contact</a>
+          <div className="d-flex gap-3 mt-4">
+  <a href="#menu" className="btn-coffee-primary">View Menu</a>
+  <a href="/contact" className="btn-coffee-outline">Contact</a>
+</div>
+
+
           </div>
 
           <div className="col-lg-6">

@@ -5,16 +5,18 @@ import App from "./App";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "./index.css"; // base utilities only (no navbar colors)
-import "./App.css";   // coffee theme & active-state styles LAST
+import "./index.css";
+import "./App.css";
 
-
+import { FavoritesProvider } from "./components/FavoritesContext"; 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <FavoritesProvider> {/* ✅ wrap everything */}
+        <App />
+      </FavoritesProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

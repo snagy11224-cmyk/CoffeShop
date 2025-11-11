@@ -1,7 +1,7 @@
 import React from "react";
 import Hero from "../components/Hero";
-import Gallery from "../components/Gallery";
-import Product from "../components/Product";
+import Gallery from "../components/Gallery";    
+//import Product from "../components/Product"; 
 import { useEffect } from "react";
 
 const items = [
@@ -56,12 +56,7 @@ export default function Home(){
         </div>
       </section>
 
-      <section className="py-5 section-muted">
-        <div className="container">
-          <h3 className="mb-4">Most Popular</h3>
-          <Product />
-        </div>
-      </section>
+  
     </>
   );
 }

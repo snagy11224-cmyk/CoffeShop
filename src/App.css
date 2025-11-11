@@ -21,6 +21,8 @@
   --coffee-150:  #f1e6dc;
   --coffee-100:  #f6eee7;  /* muted section bg */
   --coffee-050:  #fbf8f5;  /* page bg (very light) */
+  --brown-dark: #5C3A21;
+  --brown-light: #EEDDD2; 
 
   --ink-900: #2a201b; /* headings on light */
   --ink-700: #4d3c33; /* body on light */
@@ -156,24 +158,24 @@ h1, h2, h3, .h1, .h2, .h3 { color: var(--ink-900); }
 /* ---------- Sections ---------- */
 .section-muted { background: var(--surface-2); }
 
-/* Smooth full-card hover zoom */
-.card {
-  transition: transform .35s ease, box-shadow .35s ease;
+/* make the whole card scale smoothly on hover */
+.zoom-card {
+  transition: transform .18s ease, box-shadow .18s ease;
+  will-change: transform;
+  border: 0;
+}
+.zoom-card:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,.15);
 }
 
-.card:hover {
-  transform: scale(1.07);      /* the full card grows */
-  box-shadow: 0 12px 28px rgba(0,0,0,.18);
-}
+/* keep the image crisp while scaling the card */
+.zoom-wrapper { overflow: hidden; border-top-left-radius: .5rem; border-top-right-radius: .5rem; }
+.zoom-wrapper img { transition: transform .25s ease; }
+.zoom-card:hover .zoom-wrapper img { transform: scale(1.06); }
 
-/* Keep the image nice + crisp */
-.card-img-top {
-  transition: filter .35s ease;
-}
-
-.card:hover .card-img-top {
-  filter: brightness(1.05);   /* optional slight highlight */
-}
+/* pointer cursor helper */
+.cursor-pointer { cursor: pointer; }
 
 
 /* ---------- Buttons ---------- */
@@ -198,6 +200,40 @@ h1, h2, h3, .h1, .h2, .h3 { color: var(--ink-900); }
 .btn-ghost:hover {
   background: rgba(255,255,255,.2);
   border-color: rgba(255,255,255,.35);
+}
+
+.btn-coffee-primary {
+  padding: 12px 28px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #5C3A21; /* بني */
+  font-weight: 600;
+  border: 1px solid #ffffff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  transition: 0.3s ease;
+}
+
+.btn-coffee-primary:hover {
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  transform: translateY(-2px);
+}
+
+/* Contact button */
+.btn-coffee-outline {
+  padding: 12px 28px;
+  border-radius: 10px;
+  background: transparent;
+  color: #5C3A21; /* بني */
+  font-weight: 600;
+  border: 2px solid #5C3A21;
+  transition: 0.3s ease;
+}
+
+.btn-coffee-outline:hover {
+  background: #5C3A21;
+  color: #ffffff;
+  transform: translateY(-2px);
 }
 
 /* ---------- Links ---------- */
@@ -306,3 +342,24 @@ footer .copy {
   font-size: .9rem;
 }
 
+/* شكل التاب العادي */
+.nav-pills .nav-link {
+  color: var(--brown-dark);
+  background: var(--brown-light);
+  border-radius: 30px;
+  font-weight: 500;
+  transition: 0.25s;
+  border: 1px solid var(--brown-light);
+}
+
+/* hover */
+.nav-pills .nav-link:hover {
+  filter: brightness(0.92);
+}
+
+/* Active */
+.nav-pills .nav-link.active {
+  background: var(--brown-dark) !important;
+  color: #f9f6f6 !important;
+  border-color: var(--brown-dark) !important;
+}
