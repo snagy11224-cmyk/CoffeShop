@@ -8,14 +8,17 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./index.css";
 import "./App.css";
 
-import { FavoritesProvider } from "./components/FavoritesContext"; 
+import { FavoritesProvider } from "./components/FavoritesContext";
+import { CartProvider } from "./components/CartContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <FavoritesProvider> {/* ✅ wrap everything */}
-        <App />
+      <FavoritesProvider>
+        <CartProvider>
+          <App />
+        </CartProvider>
       </FavoritesProvider>
     </BrowserRouter>
   </React.StrictMode>
